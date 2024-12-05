@@ -13,66 +13,71 @@ if you pair up a 9 with a 3, the distance apart is 6.
 
 use std::collections::HashMap;
 
-use super::read_input_file;
+use super::AOC;
+use super::{read_input_file, PATH};
 
-pub fn aoc_1_a() -> i32 {
-    let path = "./src/aoc_input/aoc_1.txt";
-    let inputs = read_input_file(path);
-    let (mut col1, mut col2) = transform_data(inputs);
+static FILE: &'static str = "aoc_1.txt";
 
-    // Maybe consider implement a quick sort real quick
-    // So I can re-learn some sorting algorithms
-    col1.sort();
-    col2.sort();
+impl AOC {
+    pub fn aoc_1_a() -> i32 {
+        let inputs = read_input_file(format!("{PATH}/{FILE}"));
+        let (mut col1, mut col2) = Self::transform_data_1(inputs);
 
-    let mut sum: i32 = 0;
+        // Maybe consider implement a quick sort real quick
+        // So I can re-learn some sorting algorithms
+        col1.sort();
+        col2.sort();
 
-    for x in 0..col1.len() {
-        let diff = col1[x] - col2[x];
-        sum += diff.abs();
-    }
+        let mut sum: i32 = 0;
 
-    sum
-}
-
-pub fn aoc_1_b() -> i32 {
-    let path = "./src/aoc_input/aoc_1.txt";
-    let inputs = read_input_file(path);
-    let (col1, col2) = transform_data(inputs);
-
-    let mut hm = HashMap::<i32, i32>::new();
-
-    for i in 0..col2.len() {
-        *hm.entry(col2[i]).or_insert(0) += 1;
-    }
-
-    let mut sum: i32 = 0;
-
-    for i in 0..col1.len() {
-        match hm.get(&col1[i]) {
-            Some(num) => {
-                sum += num * col1[i];
-            }
-            None => {}
+        for x in 0..col1.len() {
+            let diff = col1[x] - col2[x];
+            sum += diff.abs();
         }
+
+        sum
     }
 
-    sum
-}
+    // ran
 
-/// Turns Vec<String> into Vec<Vec<u32>> where there are only two indices
-/// 0 = column 1
-/// 1 = column 2
-fn transform_data(input: Vec<String>) -> (Vec<i32>, Vec<i32>) {
-    let mut column_1 = Vec::new();
-    let mut column_2 = Vec::new();
+    pub fn aoc_1_b() -> i32 {
+        let inputs = read_input_file(format!("{PATH}/{FILE}"));
+        let (col1, col2) = Self::transform_data_1(inputs);
 
-    let mut input_iter = input.iter().map(|line| {
-        let temp: Vec<&str> = line.split("   ").collect();
-        column_1.push(temp[0].parse().unwrap());
-        column_2.push(temp[1].parse().unwrap());
-    });
+        let mut hm = HashMap::<i32, i32>::with_capacity(1000);
 
-    while let Some(_) = input_iter.next() {}
-    (column_1, column_2)
+        for i in 0..col2.len() {
+            *hm.entry(col2[i]).or_insert(0) += 1;
+        }
+
+        let mut sum: i32 = 0;
+
+        for i in 0..col1.len() {
+            match hm.get(&col1[i]) {
+                Some(num) => {
+                    sum += num * col1[i];
+                }
+                None => {}
+            }
+        }
+
+        sum
+    }
+
+    /// Turns Vec<String> into Vec<Vec<u32>> where there are only two indices
+    /// 0 = column 1
+    /// 1 = column 2
+    fn transform_data_1(input: Vec<String>) -> (Vec<i32>, Vec<i32>) {
+        let mut column_1 = Vec::new();
+        let mut column_2 = Vec::new();
+
+        let mut input_iter = input.iter().map(|line| {
+            let temp: Vec<&str> = line.split("   ").collect();
+            column_1.push(temp[0].parse().unwrap());
+            column_2.push(temp[1].parse().unwrap());
+        });
+
+        while let Some(_) = input_iter.next() {}
+        (column_1, column_2)
+    }
 }
