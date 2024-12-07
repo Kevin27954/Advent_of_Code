@@ -2,6 +2,8 @@ use std::fs;
 
 pub mod aoc_1;
 pub mod aoc_2;
+pub mod aoc_3;
+pub mod aoc_4;
 
 static PATH: &'static str = "./src/aoc_input";
 
