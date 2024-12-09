@@ -37,6 +37,7 @@ static FILE: &'static str = "aoc_3.txt";
 static REGEX_A: &'static str = r"mul\(\d*,\d*\)";
 static REGEX_B: &'static str = r"do\(\)|mul\(\d*,\d*\)|don't\(\)";
 
+#[allow(dead_code)]
 impl AOC {
     pub fn aoc_3_a() -> i32 {
         let data = fs::read_to_string(format!("{PATH}/{FILE}")).unwrap();

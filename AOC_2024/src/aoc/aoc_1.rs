@@ -24,6 +24,7 @@ use super::{read_input_file, PATH};
 
 static FILE: &'static str = "aoc_1.txt";
 
+#[allow(dead_code)]
 impl AOC {
     pub fn aoc_1_a() -> i32 {
         let inputs = read_input_file(format!("{PATH}/{FILE}"));
