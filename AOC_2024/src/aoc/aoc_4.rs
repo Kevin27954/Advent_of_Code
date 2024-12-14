@@ -14,6 +14,7 @@ use super::{read_input_file, PATH};
 
 static FILE: &'static str = "aoc_4.txt";
 
+#[allow(dead_code)]
 impl AOC {
     pub fn aoc_4_a() -> usize {
         let data = read_input_file(format!("{PATH}/{FILE}"));
