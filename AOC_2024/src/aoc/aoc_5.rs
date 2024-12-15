@@ -76,39 +76,46 @@ impl AOC {
             ref_hm.insert(order.1, true);
         }
 
-        for mut pages in page_list {
+        for pages in page_list {
             let mut is_error = false;
 
             for i in 0..pages.len() - 1 {
                 if let Some(order_map) = hm.get(&pages[i]) {
-                    // If it is in the HashMap, then things should be after it
-                    // it it isn't in the HashMap, then things should not be after it.
                     if let None = order_map.get(&pages[i + 1]) {
                         is_error = true;
-                        let temp_len = pages.len();
-                        let error = pages.remove(i);
-
-                        for j in 0..pages.len() {
-                            if let Some(_) = order_map.get(&pages[j]) {
-                                pages.insert(j, error);
-                                break;
-                            }
-                        }
-
-                        if pages.len() < temp_len {
-                            println!("{}", error);
-                            pages.insert(pages.len(), error);
-                        }
                     }
                 } else {
                     is_error = true;
-                    let error = pages.remove(i);
-                    pages.insert(pages.len(), error);
                 }
             }
 
             if is_error {
-                total += pages[pages.len() / 2];
+                let mut new_pages: Vec<i32> = Vec::new();
+                for page in &pages {
+                    let curr_len = new_pages.len();
+
+                    if new_pages.is_empty() {
+                        new_pages.push(page.clone());
+                        continue;
+                    }
+
+                    if let Some(new_order_map) = hm.get(&page) {
+                        for j in 0..new_pages.len() {
+                            if let Some(_) = new_order_map.get(&new_pages[j]) {
+                                new_pages.insert(j, page.clone());
+                                break;
+                            }
+                        }
+
+                        if curr_len == new_pages.len() {
+                            new_pages.push(page.clone());
+                        }
+                    } else {
+                        new_pages.push(page.clone());
+                    }
+                }
+
+                total += new_pages[new_pages.len() / 2];
             }
         }
 
