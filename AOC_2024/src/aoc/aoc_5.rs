@@ -26,6 +26,7 @@ use std::collections::HashMap;
 
 static FILE: &'static str = "aoc_5.txt";
 
+#[allow(dead_code)]
 impl AOC {
     pub fn aoc_5_a() -> i32 {
         let data = read_input_file(format!("{PATH}/{FILE}"));
