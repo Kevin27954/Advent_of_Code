@@ -147,7 +147,7 @@ impl AOC {
         total_safe
     }
 
-    pub fn transform_data_2(inputs: Vec<String>) -> Vec<Vec<i32>> {
+    fn transform_data_2(inputs: Vec<String>) -> Vec<Vec<i32>> {
         let mut data = Vec::new();
 
         inputs.iter().for_each(|line| {
