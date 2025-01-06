@@ -5,13 +5,22 @@ Problem A:
 Each line represents a single equation. The test value appears before the colon on each line; it is your job
 to determine whether the remaining numbers can be combined with operators to produce the test value.
 
-Operators allowed: +, - , *, /
+Operators allowed: +, *
 
 e.g.
 190: 10 19
 
 The engineers just need the total calibration result, which is the sum of the test values from just the equations
 that could possibly be true.
+
+Problem B:
+
+The concatenation operator (||) combines the digits from its left and right inputs into a single number. For example,
+12 || 345 would become 12345. All operators are still evaluated left-to-right.
+
+Operators allowed: +, *, ||
+
+What is their total calibration result?
 
 */
 

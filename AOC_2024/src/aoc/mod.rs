@@ -7,6 +7,7 @@ pub mod aoc_4;
 pub mod aoc_5;
 pub mod aoc_6;
 pub mod aoc_7;
+pub mod aoc_8;
 
 static PATH: &'static str = "./src/aoc_input";
 
