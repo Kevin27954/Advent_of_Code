@@ -35,6 +35,7 @@ enum Operations {
     Concat,
 }
 
+#[allow(dead_code)]
 impl AOC {
     pub fn aoc_7_a() -> usize {
         let data = read_input_file(format!("{}/{}", PATH, FILE));
